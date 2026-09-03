@@ -1,2 +1,42 @@
-const COMMANDS=['g=kick','g=ban','g=idban','g=unban','g=mute','g=unmute','g=clear','g=warn','g=unwarn','g=totalwarn','g=new','g=close','g=slowmode','g=sugerir','g=setsug','g=voto','g=serverinfo','g=miembros','g=embedsay','g=embedimg','g=emoji','g=levelactive','g=colorrank','g=clevel','g=setupserver','g=anuncio','g=wchannel','g=wtext','g=wimage','g=wprueba','g=wcolor','g=lchannel','g=ltext','g=limage','g=tnew','g=ctnew','g=logclose','g=emojiadd','g=antilink on','g=antilink off','g=enablelink','g=disablelink','g=cnewping','g=afk on','g=afk off','g=slap','g=kill','g=say','g=randomship','g=ship','g=love','g=sad','g=memes','g=ping','g=ppt','g=dados','g=avatar','g=toprank','g=kiss','g=jumbo','g=hug','g=revivir','g=angry','g=blush','g=atrapar','g=azar','g=servermc','g=skinmc','g=cabezamc','g=caramc','g=logromc','g=moneywallet','g=comprar caña','g=ucaña','g=caña','g=work','g=rulet','g=casino','g=topmoney','g=rob','g=moneybank','g=deposit','g=with','g=dardinero','g=dep all','g=give','g=removemoney','g=removebank'];
-function filter(){const q=document.getElementById('q').value.trim().toLowerCase(),box=document.getElementById('results');if(!q){box.innerHTML='<div class="cmd"><code>Ejemplo: g=ban</code><small>Escribí un comando para comenzar la búsqueda.</small></div>';return}const a=COMMANDS.filter(c=>c.toLowerCase().includes(q));box.innerHTML=a.length?a.map(c=>'<div class="cmd"><code>'+c+'</code></div>').join(''):'<div class="cmd"><code>No se encontró ningún comando.</code></div>}filter();
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("q");
+  const results = document.getElementById("results");
+
+  if (!input || !results || !Array.isArray(COMMANDS)) return;
+
+  const normalize = (value) => value.trim().toLowerCase();
+
+  const render = (list) => {
+    if (!list.length) {
+      results.innerHTML = '<div class="cmd empty"><strong>No se encontró ningún comando.</strong><small>Probá con otro nombre, por ejemplo: ban, mute, skinmc o dinero.</small></div>';
+      return;
+    }
+
+    results.innerHTML = list.map(({ command, description, category }) => `
+      <div class="cmd">
+        <code>${command}</code>
+        <small>${description} · ${category}</small>
+      </div>
+    `).join("");
+  };
+
+  const filterCommands = () => {
+    const query = normalize(input.value);
+    if (!query) {
+      render(COMMANDS);
+      return;
+    }
+
+    const list = COMMANDS.filter(({ command }) => {
+      const name = normalize(command);
+      const withoutPrefix = name.startsWith("g=") ? name.slice(2) : name;
+      const search = query.startsWith("g=") ? query.slice(2) : query;
+      return name.includes(query) || withoutPrefix.includes(search);
+    });
+
+    render(list);
+  };
+
+  input.addEventListener("input", filterCommands);
+  render(COMMANDS);
+});

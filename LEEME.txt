@@ -1,0 +1,26 @@
+GHOSSBOT WEB - VERSION CORREGIDA
+
+Subí TODOS estos archivos directamente a la raíz de tu repositorio de GitHub Pages:
+- index.html
+- Moderacion.html
+- Administracion.html
+- Diversion.html
+- Minecraft.html
+- Economia.html
+- style.css
+- commands.js
+- search.js
+
+IMPORTANTE:
+1. No metas los archivos dentro de otra carpeta.
+2. Reemplazá los archivos anteriores si GitHub pregunta.
+3. Esperá unos segundos/minutos y recargá la página.
+4. Si el navegador sigue mostrando la versión vieja, recargá en incógnito o borrá la caché del sitio.
+
+CAMBIOS:
+- Todos los comandos ahora aparecen con g=, incluidos Administración y Minecraft.
+- La búsqueda funciona con "ban" y también con "g=ban".
+- La búsqueda solo busca dentro de los nombres de comandos.
+- Al abrir la página se muestran todos los comandos.
+- Se corrigió la carga del JavaScript y se agregó versionado (?v=3) para evitar caché vieja.
+- En celular los comandos quedan en una sola columna y no se desbordan.
